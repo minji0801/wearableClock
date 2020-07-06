@@ -8,11 +8,13 @@ Window {
     width: 320
     height: 320
     title: qsTr("Wearable Clock")
+    property string timeString;
 
     signal startTimerSignal;    // qml에서 cpp로 보낼 signal
 
     function timeSetLabel(data) {   // cpp에서 현재시간을 담아서 보낸 signal과 짝인 slot함수
         console.log("timeSetLabel()!! " + data);
+        timeString = data;
     }
 
     StackView {
