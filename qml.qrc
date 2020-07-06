@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>clock1.png</file>
+        <file>clock2.png</file>
+        <file>clockscreen.qml</file>
+        <file>back.png</file>
+    </qresource>
+</RCC>
