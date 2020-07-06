@@ -6,6 +6,13 @@ Item {
     width: 320
     height: 320
 
+    Component.onCompleted: {
+        var previousItem = stackView.get(StackView.index - 1);  // stackview의 이전 index의 objectName을 가져온다.
+        if (previousItem.objectName === "mainScreen") {
+            console.log("data2: " + previousItem.data2);
+        }
+    }
+
     Image { // 뒤로가기 버튼
         id: backButton
         source: "back.png"
