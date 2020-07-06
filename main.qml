@@ -89,8 +89,8 @@ Window {
         Label { // 시간을 보여주긴 위한 label
             id: timeLabel
             anchors.centerIn: parent
-            text: "00:00:00"
-            font.pixelSize: 60
+            text: "loading.."
+            font.pixelSize: 50
             font.bold: true
             font.family: "나눔스퀘어_ac"
 
