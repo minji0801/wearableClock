@@ -18,8 +18,7 @@ public:
 public:
     WearableClock();
 
-    void setWindow1(QQuickWindow *Window);
-    void setWindow2(QObject *Object);
+    void setWindow(QQuickWindow *Window);
     void siganlAndSlot();
 
 signals:
@@ -29,6 +28,7 @@ signals:
 
 public slots:
     void startTimer();  // Timer를 시작하는 함수
+    void stopTimer();  // Timer를 없애는 함수
     void whatTimeNow(); // 현재 시간을 구해주는 함수
 
     void showChange(bool);  // 시간 표기법 관련 함수

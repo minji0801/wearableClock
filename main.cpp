@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 
     QObject *root = engine.rootObjects()[0];
 
-    event->setWindow1(qobject_cast<QQuickWindow *>(root));
+    event->setWindow(qobject_cast<QQuickWindow *>(root));
 
     if (engine.rootObjects().isEmpty())
         return -1;
