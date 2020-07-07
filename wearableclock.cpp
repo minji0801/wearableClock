@@ -5,7 +5,7 @@ WearableClock::WearableClock()
     show = true;
 }
 
-void WearableClock::setWindow1(QQuickWindow *Window)
+void WearableClock::setWindow(QQuickWindow *Window)
 {
     mainQml = Window;
     siganlAndSlot();
@@ -13,7 +13,8 @@ void WearableClock::setWindow1(QQuickWindow *Window)
 
 void WearableClock::siganlAndSlot()
 {
-    QObject::connect(mainQml, SIGNAL(startTimerSignal()), this, SLOT(startTimer())); // qml에서 보낸 signal로 인해 startChangeTrue () slot 함수 실행
+    QObject::connect(mainQml, SIGNAL(startTimerSignal()), this, SLOT(startTimer())); // qml에서 보낸 signal로 인해 startTimer () slot 함수 실행
+    QObject::connect(mainQml, SIGNAL(stopTimerSignal()), this, SLOT(stopTimer()));  // qml에서 보낸 signal로 인해 stopTimer() slot 함수 실행
     QObject::connect(this, SIGNAL(nowTimeToQml(QVariant)), mainQml, SLOT(timeSetLabel(QVariant)));    // 현재 시간을 담아서 cpp에서 qml로 signal을 보내어 qml에 있는 timeSetLabel() slot 함수 실행
 
     QObject::connect(mainQml, SIGNAL(howShowTimeSignal(bool)), this, SLOT(showChange(bool)));
@@ -26,6 +27,12 @@ void WearableClock::startTimer()    // QTimer 시작하는 함수
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(whatTimeNow()));
     timer->start(1000);
+}
+
+void WearableClock::stopTimer() // QTimer 없애는 함수
+{
+    cout << "stopTimer()!!" << endl;
+    delete timer;
 }
 
 void WearableClock::whatTimeNow()   // 현재 시간을 담아 보내는 함수
@@ -41,20 +48,17 @@ void WearableClock::whatTimeNow()   // 현재 시간을 담아 보내는 함수
             // 오후인 경우
             int hourInt = hourText.toInt() - 12;
             nowTimeText = QString::number(hourInt) + ":" + time.toString("mm:ss");
-            cout << "nowTimeText value: " << nowTimeText.toUtf8().constData() << endl;
             emit amOrPm("오후");
             emit nowTimeToQml(nowTimeText);
         } else if (hourText.toInt() < 12) {
             // 오전인 경우
             nowTimeText = time.toString("h:mm:ss");
-            cout << "nowTimeText value: " << nowTimeText.toUtf8().constData() << endl;
             emit amOrPm("오전");
             emit nowTimeToQml(nowTimeText);
         }
     } else if (show == true) {
         // 24시간으로 보여주기
         nowTimeText = time.toString("hh:mm:ss");
-        cout << "nowTimeText value: " << nowTimeText.toUtf8().constData() << endl;
         emit amOrPm("");
         emit nowTimeToQml(nowTimeText);
     }
