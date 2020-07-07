@@ -12,7 +12,8 @@ Window {
 
     property bool clickLabel: false
 
-    signal startTimerSignal;    // qml에서 cpp로 보낼 signal
+    signal startTimerSignal;    // timer를 시작하기 위한 signal
+    signal stopTimerSignal;     // timer를 멈추기 위한 signal
     signal howShowTimeSignal(bool clickData);
 
     function timeSetLabel(data) {   // cpp에서 현재시간을 담아서 보낸 signal과 짝인 slot함수
@@ -80,6 +81,9 @@ Window {
                 anchors.fill: parent
 
                 onClicked: {
+                    console.log("stopTimerSignal()!!")
+                    stopTimerSignal();  // timer 없애는 signal 보내기
+
                     clockIconRectangle.visible = true
                     clockScreenRectangle.visible = false
                 }
