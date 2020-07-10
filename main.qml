@@ -12,8 +12,8 @@ Window {
 
     property bool clickLabel: false
 
-    signal startTimerSignal;    // timer를 시작하기 위한 signal
-    signal stopTimerSignal;     // timer를 멈추기 위한 signal
+    //signal startTimerSignal;    // timer를 시작하기 위한 signal
+    //signal stopTimerSignal;     // timer를 멈추기 위한 signal
     signal howShowTimeSignal(bool clickData);
 
     function timeSetLabel(data) {   // cpp에서 현재시간을 담아서 보낸 signal과 짝인 slot함수
@@ -44,12 +44,13 @@ Window {
                 anchors.fill: parent
 
                 onClicked: {    // 마우스를 한 번 클릭한 상태
-                    console.log("startTimerSignal()!!")
-                    startTimerSignal();     // qml에서 cpp로 signal을 보낸다. (타이머 시작 시그널)
+                    KMJ.p_bool = true
+
+                    //console.log("startTimerSignal()!!")
+                    //startTimerSignal();     // qml에서 cpp로 signal을 보낸다. (타이머 시작 시그널)
 
                     clockIconRectangle.visible = false
-                    clockScreenRectangle.visible = true
-                }
+                    clockScreenRectangle.visible = true}
 
                 onPressed: {    // 마우스를 누르고 있는 상태
                     goclockscreen.source = "clock2.png"
@@ -81,8 +82,10 @@ Window {
                 anchors.fill: parent
 
                 onClicked: {
-                    console.log("stopTimerSignal()!!")
-                    stopTimerSignal();  // timer 없애는 signal 보내기
+                    KMJ.p_bool = false;
+
+                    //console.log("stopTimerSignal()!!")
+                    //stopTimerSignal();  // timer 없애는 signal 보내기
 
                     clockIconRectangle.visible = true
                     clockScreenRectangle.visible = false
@@ -93,7 +96,7 @@ Window {
         Label { // 시간을 보여주긴 위한 label
             id: timeLabel
             anchors.centerIn: parent
-            text: "loading.."
+            text: "loading..." //KMJ.p_nowtime
             font.pixelSize: 50
             font.bold: true
             font.family: "나눔스퀘어_ac"
@@ -102,13 +105,17 @@ Window {
                 anchors.fill: parent
 
                 onClicked: {
-                    if (clickLabel == false) {
-                        // am pm으로 보여주기
+                    if (clickLabel == false)    // am pm으로 보여주기
+                    {
                         howShowTimeSignal(false);
+                        //KMJ.p_show = false
                         clickLabel = true
-                    } else if (clickLabel == true) {
-                        // 24시간으로 보여주기
+                    }
+
+                    else if (clickLabel == true)    // 24시간으로 보여주기
+                    {
                         howShowTimeSignal(true);
+                        //KMJ.p_show = true
                         clickLabel = false
                     }
                 }
@@ -118,7 +125,7 @@ Window {
         Label {
             id: amPmLabel
             y: 163
-            text: qsTr("")
+            text: "" //KMJ.p_ampm
             anchors.left: timeLabel.right
             anchors.leftMargin: 2
             font.bold: true
