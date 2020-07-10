@@ -12,8 +12,9 @@ Window {
 
     property bool clickLabel: false
 
-    //signal startTimerSignal;    // timer를 시작하기 위한 signal
-    //signal stopTimerSignal;     // timer를 멈추기 위한 signal
+    /*
+    signal startTimerSignal;    // timer를 시작하기 위한 signal
+    signal stopTimerSignal;     // timer를 멈추기 위한 signal
     signal howShowTimeSignal(bool clickData);
 
     function timeSetLabel(data) {   // cpp에서 현재시간을 담아서 보낸 signal과 짝인 slot함수
@@ -25,6 +26,7 @@ Window {
         console.log("amPmSetLabel()!! " + data);
         amPmLabel.text = data;
     }
+    */
 
     Rectangle {
         id: clockIconRectangle
@@ -96,10 +98,16 @@ Window {
         Label { // 시간을 보여주긴 위한 label
             id: timeLabel
             anchors.centerIn: parent
-            text: "loading..." //KMJ.p_nowtime
+            text: KMJ.p_nowtime //"loading..."
             font.pixelSize: 50
             font.bold: true
             font.family: "나눔스퀘어_ac"
+
+            /*
+            function set() {
+                timeLabel.text = KMJ.p_nowtime
+            }
+            */
 
             MouseArea {
                 anchors.fill: parent
@@ -107,30 +115,56 @@ Window {
                 onClicked: {
                     if (clickLabel == false)    // am pm으로 보여주기
                     {
-                        howShowTimeSignal(false);
-                        //KMJ.p_show = false
+                        //howShowTimeSignal(false);
+                        KMJ.p_show = false
                         clickLabel = true
                     }
 
                     else if (clickLabel == true)    // 24시간으로 보여주기
                     {
-                        howShowTimeSignal(true);
-                        //KMJ.p_show = true
+                        //howShowTimeSignal(true);
+                        KMJ.p_show = true
                         clickLabel = false
                     }
                 }
             }
         }
 
+        /*
+        Timer {
+            interval: 1000
+            repeat: true
+            running: true
+            triggeredOnStart: true
+            onTriggered: timeLabel.set()
+        }
+        */
+
         Label {
             id: amPmLabel
             y: 163
-            text: "" //KMJ.p_ampm
+            text: KMJ.p_ampm    //""
             anchors.left: timeLabel.right
             anchors.leftMargin: 2
             font.bold: true
             font.family: "나눔스퀘어_ac"
+
+            /*
+            function set() {
+                amPmLabel.text = KMJ.p_ampm
+            }
+            */
         }
+
+        /*
+        Timer {
+            interval: 1000
+            repeat: true
+            running: true
+            triggeredOnStart: true
+            onTriggered: amPmLabel.set()
+        }
+        */
     }
 }
 
