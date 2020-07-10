@@ -18,9 +18,9 @@ int main(int argc, char *argv[])
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
-    QObject *root = engine.rootObjects()[0];
+    //QObject *root = engine.rootObjects()[0];
 
-    event->setWindow(qobject_cast<QQuickWindow *>(root));
+    //event->setWindow(qobject_cast<QQuickWindow *>(root));
 
     if (engine.rootObjects().isEmpty())
         return -1;
