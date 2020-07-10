@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <wearableclock.h>
 #include <QQuickView>
+#include <QQmlContext>
 
 int main(int argc, char *argv[])
 {
@@ -12,6 +13,8 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     WearableClock *event = new WearableClock();
+
+    engine.rootContext()->setContextProperty("KMJ", event); // Q_PROPERTY 이름 설정
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
