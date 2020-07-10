@@ -26,8 +26,8 @@ public:
 public:
     WearableClock();
 
-    void setWindow(QQuickWindow *Window);
-    void siganlAndSlot();
+    //void setWindow(QQuickWindow *Window);
+    //void siganlAndSlot();
 
     bool getbool();             // startOrStop 값을 읽어오는 Q_PROPERTY READ 함수
     void setbool(bool value);   // startOrStop 값을 수정하는 Q_PROPERTY WRITE 함수
@@ -41,8 +41,8 @@ public:
 
 signals:
     //void startChangeComplete(); // start의 값을 변경하고 나면 실행되는 signal
-    void nowTimeToQml(QVariant); // 현재 시간을 qml로 넘겨주는 signal
-    void amOrPm(QVariant);  // am pm을 넘겨주는 signal
+    //void nowTimeToQml(QVariant); // 현재 시간을 qml로 넘겨주는 signal
+    //void amOrPm(QVariant);  // am pm을 넘겨주는 signal
 
     void boolchanged(const bool value); // startOrStop 값이 변경되었을 때 실행되는 Q_PROPERTY signal
     void showchanged(const bool value); // show 값이 변경되었을 때 실행되는 Q_PROPERTY signal
@@ -54,10 +54,10 @@ public slots:
     void stopTimer();   // QTimer를 객체를 없애는 함수
     void whatTimeNow(); // 현재 시간을 구해주는 함수
 
-    void showChange(const bool value);  // 시간 표기법 관련 함수
+    //void showChange(const bool value);  // 시간 표기법 관련 함수
 
 private:
-    QQuickWindow *mainQml;
+    //QQuickWindow *mainQml;
 
     //bool start;             // qml에서 startTimerSignal을 받았을 때 true 값으로 바꿔주어 timer를 실행하기 위한
     QTimer *timer;
